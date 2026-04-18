@@ -1,57 +1,57 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import React, { useState } from "react";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200">
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-3">
-        {/* LOGO */}
+    <nav className="sticky top-0 z-50 border-b border-gray-200 bg-white/80 backdrop-blur-md">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+        {/* Logo */}
         <Link href="/">
-          <div className="flex items-center gap-2 cursor-pointer group">
+          <div className="group flex cursor-pointer items-center gap-2">
             <div className="relative transition-transform duration-300 group-hover:scale-105">
               <Hexagon />
               <BookIcon />
             </div>
 
-            <span className="text-lg font-semibold uppercase tracking-wide text-gray-800 group-hover:text-[#ce7041] transition">
+            <span className="text-xl font-bold uppercase tracking-wide text-gray-800 transition group-hover:text-[#ce7041]">
               Smart Library
             </span>
           </div>
         </Link>
 
-        {/* DESKTOP MENU */}
-        <div className="hidden md:flex items-center gap-3">
-          <button className="h-10 rounded-lg border border-[#ce7041] px-5 text-sm font-medium text-[#ce7041] hover:bg-[#fcf6f0] transition">
+        {/* Desktop Buttons */}
+        <div className="hidden items-center gap-4 md:flex">
+          <button className="h-10 rounded-xl border border-[#ce7041] px-5 text-sm font-medium text-[#ce7041] transition hover:bg-[#fcf6f0]">
             Sign in
           </button>
 
-          <button className="h-10 rounded-lg bg-[#ce7041] px-5 text-sm font-medium text-white shadow-md hover:bg-[#b65f35] active:scale-95 transition">
+          <button className="h-10 rounded-xl bg-[#ce7041] px-5 text-sm font-medium text-white shadow-md transition-all duration-200 hover:bg-[#b65f35] active:scale-95">
             Sign up
           </button>
         </div>
 
-        {/* MOBILE MENU BUTTON */}
+        {/* Mobile Menu Button */}
         <button
           onClick={() => setOpen(!open)}
-          className="md:hidden flex items-center"
+          className="flex items-center md:hidden"
         >
           <MenuIcon />
         </button>
       </div>
 
-      {/* MOBILE MENU */}
+      {/* Mobile Menu */}
       {open && (
-        <div className="md:hidden px-6 py-4 bg-white border-t shadow-sm">
+        <div className="border-t bg-white px-6 py-4 shadow-sm md:hidden">
           <div className="flex flex-col gap-4">
-            <button className="w-full h-11 rounded-xl border border-[#ce7041] text-[#ce7041] font-medium tracking-wide hover:bg-[#fcf6f0] transition">
+            <button className="h-11 w-full rounded-xl border border-[#ce7041] font-medium text-[#ce7041] transition hover:bg-[#fcf6f0]">
               Sign in
             </button>
 
-            <button className="w-full h-11 rounded-xl bg-[#ce7041] text-white font-medium tracking-wide shadow-md hover:bg-[#b65f35] active:scale-[0.98] transition-all duration-200">
+            <button className="h-11 w-full rounded-xl bg-[#ce7041] font-medium text-white shadow-md transition-all duration-200 hover:bg-[#b65f35] active:scale-[0.98]">
               Sign up
             </button>
           </div>
