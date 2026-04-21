@@ -3,15 +3,16 @@ import Image from "next/image";
 
 const Banner = () => {
   return (
-    <div className="w-full py-6 px-4 sm:px-6 md:px-10">
+    <div className="w-full px-4 sm:px-6 md:px-10 py-6">
       <div
         className="
           relative
-          w-full sm:w-[85%] md:w-[65%]
+          w-full sm:w-[90%] md:w-[70%]
           mx-auto
-           h-[180px] sm:h-[230px] md:h-[280px]
-          rounded-xl
+          h-[260px] sm:h-[300px] md:h-[320px]
+          rounded-2xl
           overflow-hidden
+          shadow-lg
         "
       >
         {/* Background Image */}
@@ -31,18 +32,25 @@ const Banner = () => {
           className="
             absolute
             z-20
-            left-4 sm:left-8 md:left-10
-            top-1/2
-            -translate-y-1/2
-            max-w-[55%] sm:max-w-[50%]
+            left-5
+            sm:left-8
+            md:left-12
+            top-6
+            sm:top-1/2
+            md:top-1/2
+            sm:-translate-y-1/2
+            max-w-[52%]
+            sm:max-w-[60%]
           "
         >
           <h2
             className="
               text-white
               font-bold
-              text-lg sm:text-3xl md:text-5xl
-              leading-snug
+              text-2xl
+              sm:text-4xl
+              md:text-5xl
+              leading-tight
             "
           >
             Connect, Share and Trade Your Favourite Reads...
@@ -53,9 +61,11 @@ const Banner = () => {
         <div
           className="
             absolute
+            right-2
+            sm:right-6
+            md:right-10
+            bottom-0
             z-20
-            bottom-3 sm:bottom-4 md:bottom-6
-            right-3 sm:right-6 md:right-8
           "
         >
           <Image
@@ -64,10 +74,11 @@ const Banner = () => {
             width={280}
             height={280}
             className="
-              w-[110px]
-              sm:w-[170px]
+              w-[150px]
+              sm:w-[190px]
               md:w-[250px]
-              h-auto
+              h-[220px]
+              object-contain
               -mb-4
             "
           />
