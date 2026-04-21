@@ -3,40 +3,75 @@ import Image from "next/image";
 
 const Banner = () => {
   return (
-    <div className="w-full mx-auto py-6 sm:py-8 md:py-10 px-4 sm:px-6 md:px-10">
-      <div className="relative w-[90%] mx-auto h-[220px] sm:h-[280px] md:h-[300px] rounded-xl overflow-hidden">
+    <div className="w-full py-6 px-4 sm:px-6 md:px-10">
+      <div
+        className="
+          relative
+          w-full sm:w-[85%] md:w-[65%]
+          mx-auto
+           h-[180px] sm:h-[230px] md:h-[280px]
+          rounded-xl
+          overflow-hidden
+        "
+      >
         {/* Background Image */}
         <Image
           src="/paper-bg.jpg"
           alt="banner background"
           fill
-          className="object-cover"
           priority
+          className="object-cover"
         />
 
-        {/* Dark Overlay */}
-        <div className="absolute inset-0 bg-black/30 z-10" />
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/20 z-10" />
 
-        {/* Right Side Book Image */}
-        <Image
-          src="/book.png"
-          alt="book"
-          width={250}
-          height={250}
-          className="absolute bottom-0 right-2 sm:right-6 md:right-8 z-20 
-                     h-[130px] sm:h-[180px] md:h-[220px] w-auto"
-        />
-
-        {/* Text */}
-        <h3
-          className="absolute left-4 sm:left-8 md:left-10 top-1/2 z-20 
-                     max-w-[70%] sm:max-w-xl md:max-w-2xl 
-                     -translate-y-1/2 text-white 
-                     text-xl sm:text-3xl md:text-5xl 
-                     font-bold leading-snug md:leading-tight"
+        {/* Text Section */}
+        <div
+          className="
+            absolute
+            z-20
+            left-4 sm:left-8 md:left-10
+            top-1/2
+            -translate-y-1/2
+            max-w-[55%] sm:max-w-[50%]
+          "
         >
-          Connect, Share and Trade Your Favourite Reads...
-        </h3>
+          <h2
+            className="
+              text-white
+              font-bold
+              text-lg sm:text-3xl md:text-5xl
+              leading-snug
+            "
+          >
+            Connect, Share and Trade Your Favourite Reads...
+          </h2>
+        </div>
+
+        {/* Book Image */}
+        <div
+          className="
+            absolute
+            z-20
+            bottom-3 sm:bottom-4 md:bottom-6
+            right-3 sm:right-6 md:right-8
+          "
+        >
+          <Image
+            src="/book.png"
+            alt="book"
+            width={280}
+            height={280}
+            className="
+              w-[110px]
+              sm:w-[170px]
+              md:w-[250px]
+              h-auto
+              -mb-4
+            "
+          />
+        </div>
       </div>
     </div>
   );
