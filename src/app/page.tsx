@@ -13,19 +13,18 @@ export default async function Home() {
       throw new Error(`Failed with status: ${response.status}`);
     }
 
-    book = await response.json();
+    const data = await response.json();
+    book = data.books;
 
     console.log(book);
   } catch (error) {
     console.log("Fetch Error:", error);
   }
 
-  console.log(book);
-
   return (
     <>
       <Banner />
-      <BookList />
+      <BookList book={book} />
     </>
   );
 }
