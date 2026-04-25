@@ -1,116 +1,153 @@
 "use client";
 
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  // Add a shadow when user scrolls
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-gray-200 bg-white/80 backdrop-blur-md">
+    <nav
+      className={`sticky top-0 z-50 transition-all duration-300 border-b ${
+        scrolled
+          ? "bg-white/90 shadow-sm border-gray-200"
+          : "bg-white/70 border-transparent"
+      } backdrop-blur-md`}
+    >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        {/* Logo */}
+        {/* Logo Section */}
         <Link href="/">
-          <div className="group flex cursor-pointer items-center gap-2">
-            <div className="relative transition-transform duration-300 group-hover:scale-105">
+          <div className="group flex cursor-pointer items-center gap-3">
+            <div className="relative flex items-center justify-center transition-transform duration-500 group-hover:rotate-[360deg]">
               <Hexagon />
               <BookIcon />
             </div>
-
-            <span className="text-xl font-bold uppercase tracking-wide text-gray-800 transition group-hover:text-[#ce7041]">
-              Smart Library
-            </span>
+            <div className="flex flex-col leading-tight">
+              <span className="text-xl font-black uppercase tracking-tighter text-gray-900">
+                Smart<span className="text-[#ce7041]">Library</span>
+              </span>
+              <span className="text-[10px] font-medium text-gray-500 tracking-[0.2em] uppercase">
+                Digital Archive
+              </span>
+            </div>
           </div>
         </Link>
 
-        {/* Desktop Buttons */}
-        <div className="hidden items-center gap-4 md:flex">
-          <button className="h-10 rounded-xl border border-[#ce7041] px-5 text-sm font-medium text-[#ce7041] transition hover:bg-[#fcf6f0]">
-            Sign in
-          </button>
-
-          <button className="h-10 rounded-xl bg-[#ce7041] px-5 text-sm font-medium text-white shadow-md transition-all duration-200 hover:bg-[#b65f35] active:scale-95">
-            Sign up
-          </button>
+        {/* Desktop Navigation & Search */}
+        <div className="hidden items-center gap-8 md:flex">
+          <div className="flex gap-6 text-sm font-semibold text-gray-600">
+            <Link
+              href="/books"
+              className="hover:text-[#ce7041] transition-colors"
+            >
+              Explore
+            </Link>
+            <Link
+              href="/about"
+              className="hover:text-[#ce7041] transition-colors"
+            >
+              About
+            </Link>
+          </div>
+          <div className="h-6 w-[1px] bg-gray-200" /> {/* Divider */}
+          <div className="flex items-center gap-3">
+            <button className="h-10 rounded-xl px-5 text-sm font-bold text-gray-700 transition hover:text-[#ce7041]">
+              Sign in
+            </button>
+            <button className="h-10 rounded-xl bg-[#ce7041] px-6 text-sm font-bold text-white shadow-lg shadow-[#ce7041]/20 transition-all hover:bg-[#b65f35] hover:shadow-[#ce7041]/40 active:scale-95">
+              Get Started
+            </button>
+          </div>
         </div>
 
         {/* Mobile Menu Button */}
         <button
           onClick={() => setOpen(!open)}
-          className="flex items-center md:hidden"
+          className="relative h-10 w-10 flex items-center justify-center rounded-lg bg-gray-50 md:hidden"
         >
-          <MenuIcon />
+          <div className="flex flex-col gap-1.5 items-center justify-center">
+            <span
+              className={`h-0.5 w-5 bg-gray-800 transition-all ${open ? "rotate-45 translate-y-2" : ""}`}
+            />
+            <span
+              className={`h-0.5 w-5 bg-gray-800 transition-all ${open ? "opacity-0" : ""}`}
+            />
+            <span
+              className={`h-0.5 w-5 bg-gray-800 transition-all ${open ? "-rotate-45 -translate-y-2" : ""}`}
+            />
+          </div>
         </button>
       </div>
 
-      {/* Mobile Menu */}
-      {open && (
-        <div className="border-t bg-white px-6 py-4 shadow-sm md:hidden">
-          <div className="flex flex-col gap-4">
-            <button className="h-11 w-full rounded-xl border border-[#ce7041] font-medium text-[#ce7041] transition hover:bg-[#fcf6f0]">
-              Sign in
-            </button>
-
-            <button className="h-11 w-full rounded-xl bg-[#ce7041] font-medium text-white shadow-md transition-all duration-200 hover:bg-[#b65f35] active:scale-[0.98]">
-              Sign up
-            </button>
-          </div>
+      {/* Animated Mobile Menu */}
+      <div
+        className={`absolute top-full left-0 w-full bg-white border-b shadow-xl transition-all duration-300 ease-in-out md:hidden ${
+          open
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 -translate-y-4 pointer-events-none"
+        }`}
+      >
+        <div className="flex flex-col gap-3 p-6">
+          <Link href="/books" className="text-lg font-semibold text-gray-800">
+            Explore Books
+          </Link>
+          <Link href="/about" className="text-lg font-semibold text-gray-800">
+            Community
+          </Link>
+          <hr className="my-2" />
+          <button className="h-12 w-full rounded-xl border-2 border-[#ce7041] font-bold text-[#ce7041]">
+            Sign in
+          </button>
+          <button className="h-12 w-full rounded-xl bg-[#ce7041] font-bold text-white shadow-lg">
+            Sign up
+          </button>
         </div>
-      )}
+      </div>
     </nav>
   );
 };
 
 export default Navbar;
 
-/* ================= ICONS ================= */
+/* ================= UPDATED ICONS ================= */
 
 const Hexagon = () => (
   <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="45"
-    height="45"
+    width="42"
+    height="42"
     viewBox="0 0 24 24"
-    fill="#ce7041"
-    stroke="#ce7041"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
   >
-    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+    <path
+      d="M12 2L3.5 7V17L12 22L20.5 17V7L12 2Z"
+      fill="#ce7041"
+      className="drop-shadow-sm"
+    />
   </svg>
 );
 
 const BookIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    fill="#fff"
+    fill="none"
     viewBox="0 0 24 24"
-    strokeWidth={2}
-    stroke="#ce7041"
-    className="absolute left-1/2 top-1/2 h-7 w-7 -translate-x-1/2 -translate-y-1/2"
+    strokeWidth={2.5}
+    stroke="white"
+    className="absolute h-5 w-5"
   >
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
       d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25"
-    />
-  </svg>
-);
-
-const MenuIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    className="h-6 w-6 text-gray-800"
-    fill="none"
-    viewBox="0 0 24 24"
-    stroke="currentColor"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth={2}
-      d="M4 6h16M4 12h16M4 18h16"
     />
   </svg>
 );

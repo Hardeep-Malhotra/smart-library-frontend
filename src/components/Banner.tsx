@@ -1,86 +1,37 @@
+// Banner.tsx (Server Component)
 import React from "react";
 import Image from "next/image";
 
 const Banner = () => {
   return (
-    <div className="w-full px-4 sm:px-6 md:px-10 py-6">
-      <div
-        className="
-          relative
-          w-full sm:w-[90%] md:w-[70%]
-          mx-auto
-          h-[260px] sm:h-[300px] md:h-[320px]
-          rounded-2xl
-          overflow-hidden
-          shadow-lg
-        "
-      >
-        {/* Background Image */}
+    <div className="w-full px-4 sm:px-6 md:px-10 py-8">
+      <div className="relative w-full max-w-6xl mx-auto h-[220px] sm:h-[300px] md:h-[360px] rounded-[2rem] overflow-hidden shadow-2xl group">
         <Image
           src="/paper-bg.jpg"
           alt="banner background"
           fill
           priority
-          className="object-cover"
+          className="object-cover transition-transform duration-700 group-hover:scale-105"
         />
 
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-black/20 z-10" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-transparent z-10" />
 
-        {/* Text Section */}
-        <div
-          className="
-            absolute
-            z-20
-            left-5
-            sm:left-8
-            md:left-12
-            top-6
-            sm:top-1/2
-            md:top-1/2
-            sm:-translate-y-1/2
-            max-w-[52%]
-            sm:max-w-[60%]
-          "
-        >
-          <h2
-            className="
-              text-white
-              font-bold
-              text-2xl
-              sm:text-4xl
-              md:text-5xl
-              leading-tight
-            "
-          >
-            Connect, Share and Trade Your Favourite Reads...
+        <div className="absolute z-20 left-6 sm:left-12 md:left-16 top-1/2 -translate-y-1/2 max-w-[65%] sm:max-w-[55%]">
+          <h2 className="text-white font-black text-2xl sm:text-4xl md:text-5xl lg:text-6xl leading-[1.1] drop-shadow-lg tracking-tight">
+            Connect, Share <br className="hidden sm:block" />
+            <span className="text-[#f3d0b9]">and Trade</span> <br />
+            Your Favourite Reads...
           </h2>
         </div>
 
-        {/* Book Image */}
-        <div
-          className="
-            absolute
-            right-2
-            sm:right-6
-            md:right-10
-            bottom-0
-            z-20
-          "
-        >
+        {/* This div now uses the animation from tailwind.config */}
+        <div className="absolute right-0 sm:right-6 md:right-12 bottom-0 z-20 pointer-events-none animate-float">
           <Image
             src="/book.png"
             alt="book"
-            width={280}
-            height={280}
-            className="
-              w-[150px]
-              sm:w-[190px]
-              md:w-[250px]
-              h-[220px]
-              object-contain
-              -mb-4
-            "
+            width={350}
+            height={350}
+            className="w-[140px] sm:w-[220px] md:w-[300px] lg:w-[350px] object-contain drop-shadow-[0_20px_30px_rgba(0,0,0,0.5)]"
           />
         </div>
       </div>
