@@ -1,11 +1,12 @@
 import React from "react";
 import { Book } from "@/types";
+import BookCard from "./BookCard";
 
 const BookList = ({ book }: { book: Book[] }) => {
   return (
     <div>
       {book.map((item) => (
-        <h1 key={item._id}>{item.title}</h1>
+        <BookCard key={item._id} book={item} />
       ))}
     </div>
   );
